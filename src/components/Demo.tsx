@@ -75,7 +75,7 @@ function Result() {
         <h3 className={h}>Observed</h3>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-muted">{r.findings.map((f) => <li key={f.text}>{f.text}</li>)}</ul>
       </div>
-      <div className="rounded-lg border border-line bg-soft p-4">
+      <div className="rounded-lg border border-line bg-teal-tint/60 p-4">
         <h3 className={h}>Likely cause · unverified</h3>
         <p className="mt-2 font-semibold text-fg">{r.hypothesis.title}</p>
         <p className="mt-1 text-muted">{r.hypothesis.body}</p>

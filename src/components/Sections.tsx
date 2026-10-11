@@ -9,9 +9,9 @@ export function Problem() {
   ];
   return (
     <Section eyebrow="Why we're building this" title="Most of an incident is spent figuring out what you're looking at.">
-      <div className="grid gap-x-10 gap-y-8 md:grid-cols-3">
-        {items.map(([t, d]) => (
-          <div key={t} className="border-t border-fg pt-5">
+      <div className="grid gap-6 md:grid-cols-3">
+        {items.map(([t, d], i) => (
+          <div key={t} className={`rounded-xl border-t-4 p-6 ${["border-accent bg-blue-tint/70", "border-teal bg-teal-tint/70", "border-violet bg-violet-tint/70"][i]}`}>
             <h3 className="text-lg font-semibold leading-snug">{t}</h3>
             <p className="mt-3 leading-relaxed text-muted">{d}</p>
           </div>
@@ -21,28 +21,35 @@ export function Problem() {
   );
 }
 
-function Row({ n, title, body, flip = false, children }: { n: string; title: string; body: string; flip?: boolean; children: React.ReactNode }) {
+const TONES = {
+  blue: ["bg-blue-tint", "text-accent"],
+  teal: ["bg-teal-tint", "text-teal"],
+  violet: ["bg-violet-tint", "text-violet"],
+  amber: ["bg-amber-tint", "text-amber"],
+} as const;
+
+function Row({ n, title, body, flip = false, tone, children }: { n: string; title: string; body: string; flip?: boolean; tone: keyof typeof TONES; children: React.ReactNode }) {
   return (
     <div className="grid items-center gap-10 border-t border-line py-14 first:border-t-0 md:grid-cols-2 md:gap-16">
       <div className={flip ? "md:order-2" : ""}>
-        <p className="font-mono text-xs text-accent">{n}</p>
+        <p className={`font-mono text-xs font-semibold ${TONES[tone][1]}`}>{n}</p>
         <h3 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl">{title}</h3>
         <p className="mt-4 max-w-md leading-relaxed text-muted">{body}</p>
       </div>
-      <div className={`min-w-0 ${flip ? "md:order-1" : ""}`}>{children}</div>
+      <div className={`min-w-0 rounded-2xl p-5 sm:p-8 ${TONES[tone][0]} ${flip ? "md:order-1" : ""}`}>{children}</div>
     </div>
   );
 }
 
 export function Platform() {
   return (
-    <div className="border-y border-line bg-soft/60">
+    <div className="border-y border-line bg-white">
       <Section
         id="platform" eyebrow="Platform" title="From a wall of errors to a clear next step."
         intro="What we're building, feature by feature. Screens on this page show illustrative sample data."
       >
         <div>
-          <Row n="01" title="Log analysis that shows what matters" body="Paste logs or error messages and see the related errors grouped, the first failure marked, and the lines worth reading highlighted.">
+          <Row tone="blue" n="01" title="Log analysis that shows what matters" body="Paste logs or error messages and see the related errors grouped, the first failure marked, and the lines worth reading highlighted.">
             <Window title="Log analysis" dark>
               <div className="overflow-x-auto p-3 font-mono text-[11px] leading-[1.75] text-slate-400">
                 {[
@@ -58,7 +65,7 @@ export function Platform() {
               <p className="border-t border-slate-800 px-4 py-2.5 font-mono text-[11px] text-slate-500">3 related errors · first seen 09:41:08</p>
             </Window>
           </Row>
-          <Row flip n="02" title="Find the right doc without the tab hunt" body="Ask in plain language. Get the section of your runbooks or product docs that applies, with the source shown so you can read it yourself.">
+          <Row tone="teal" flip n="02" title="Find the right doc without the tab hunt" body="Ask in plain language. Get the section of your runbooks or product docs that applies, with the source shown so you can read it yourself.">
             <Window title="Knowledge search">
               <div className="space-y-3 p-4">
                 <p className="rounded-md border border-line bg-paper px-3 py-2 text-sm text-fg">connection pool timeout after deploy</p>
@@ -71,7 +78,7 @@ export function Platform() {
               </div>
             </Window>
           </Row>
-          <Row n="03" title="A root-cause draft you can edit" body="Symptoms, evidence, possible causes and what to check next, in one structured document. Observed facts and suggestions are kept apart.">
+          <Row tone="violet" n="03" title="A root-cause draft you can edit" body="Symptoms, evidence, possible causes and what to check next, in one structured document. Observed facts and suggestions are kept apart.">
             <Window title="Root-cause analysis · draft">
               <dl className="space-y-3 p-4 text-[13px] leading-snug">
                 {[["Symptoms", "503s on POST /v1/orders from 09:41."], ["Evidence", "Pool at 20/20; timeouts follow the v2.18.0 rollout."], ["Possible cause", "Connections held longer after the release (unverified)."], ["Next steps", "Diff pool config; inspect idle transactions."]].map(([k, v]) => (
@@ -83,7 +90,7 @@ export function Platform() {
               </dl>
             </Window>
           </Row>
-          <Row flip n="04" title="Updates people can actually read" body="Turn your notes into a clear summary for your team, or a plain-language explanation for a customer. Edit it, then send it your way.">
+          <Row tone="amber" flip n="04" title="Updates people can actually read" body="Turn your notes into a clear summary for your team, or a plain-language explanation for a customer. Edit it, then send it your way.">
             <Window title="Customer update · draft">
               <div className="space-y-3 p-4 text-[13px] leading-relaxed text-muted">
                 <p className="text-fg">Subject: Order creation errors this morning</p>
@@ -110,7 +117,7 @@ export function HowItWorks() {
         {steps.map(([t, d], i) => (
           <li key={t} className="relative pr-8">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-fg text-sm font-medium text-white">{i + 1}</span>
+              <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white ${["bg-accent","bg-teal","bg-violet","bg-amber"][i]}`}>{i + 1}</span>
               <span aria-hidden="true" className="hidden h-px flex-1 bg-line md:block" />
             </div>
             <h3 className="mt-5 font-semibold">{t}</h3>
@@ -118,7 +125,7 @@ export function HowItWorks() {
           </li>
         ))}
       </ol>
-      <p className="mt-12 max-w-2xl border-l-2 border-accent pl-4 text-[15px] leading-relaxed text-muted">
+      <p className="mt-12 max-w-2xl border-l-4 border-teal pl-4 text-[15px] leading-relaxed text-muted">
         <span className="font-medium text-fg">Engineers make the final call.</span> The assistant suggests; people verify before anything is changed or shared.
       </p>
     </Section>
@@ -134,12 +141,12 @@ export function Solutions() {
     ["Incident management", "Draft timelines, summaries and post-incident reports from evidence you already have."],
   ];
   return (
-    <div className="border-y border-line bg-soft/60">
+    <div className="border-y border-line bg-blue-tint/50">
       <Section id="solutions" eyebrow="Solutions" title="For the people who get the page.">
         <ul className="grid gap-x-16 md:grid-cols-2">
-          {items.map(([t, d]) => (
+          {items.map(([t, d], i) => (
             <li key={t} className="border-t border-line py-6">
-              <h3 className="font-semibold">{t}</h3>
+              <h3 className="flex items-center gap-2.5 font-semibold"><span aria-hidden="true" className={`h-2.5 w-2.5 rounded-sm ${["bg-accent","bg-teal","bg-violet","bg-amber","bg-accent"][i]}`} />{t}</h3>
               <p className="mt-2 leading-relaxed text-muted">{d}</p>
             </li>
           ))}
@@ -164,7 +171,7 @@ export function Principles() {
       <ol className="grid gap-x-16 md:grid-cols-2">
         {items.map(([t, d], i) => (
           <li key={t} className="flex gap-5 border-t border-line py-6">
-            <span className="font-mono text-sm text-accent">0{i + 1}</span>
+            <span className={`font-mono text-sm font-semibold ${["text-accent","text-teal","text-violet","text-amber"][i]}`}>0{i + 1}</span>
             <div><h3 className="font-semibold">{t}</h3><p className="mt-2 leading-relaxed text-muted">{d}</p></div>
           </li>
         ))}
@@ -181,13 +188,13 @@ export function Roadmap() {
     ["After", "Work with real teams", "Pilot with early users, measure results, improve reliability."],
   ];
   return (
-    <div className="border-y border-line bg-soft/60">
+    <div className="border-y border-line bg-soft">
       <Section id="roadmap" eyebrow="Roadmap" title="Where we're headed." intro="Our current plan. It will change as we learn, and it isn't a promise of dates.">
         <ol className="relative grid gap-10 md:grid-cols-4 md:gap-6">
           <span aria-hidden="true" className="absolute left-[7px] top-2 hidden h-px w-[calc(100%-1rem)] bg-line md:block" />
           {phases.map(([when, t, d], i) => (
             <li key={t} className="relative">
-              <span className={`relative z-10 block h-[15px] w-[15px] rounded-full border-2 ${i === 0 ? "border-accent bg-accent" : "border-fg/40 bg-paper"}`} />
+              <span className={`relative z-10 block h-[15px] w-[15px] rounded-full ring-4 ring-white ${["bg-accent","bg-teal","bg-violet","bg-amber"][i]}`} />
               <p className="mt-4 font-mono text-xs uppercase tracking-widest text-muted">{when}</p>
               <h3 className="mt-1.5 font-semibold">{t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{d}</p>
@@ -215,7 +222,7 @@ export function Company() {
         </div>
         <div className="self-start border-t border-fg pt-5">
           <div className="flex items-center gap-4">
-            <span aria-hidden="true" className="flex h-12 w-12 items-center justify-center rounded-full bg-accent font-semibold text-white">DS</span>
+            <span aria-hidden="true" className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-accent to-violet font-semibold text-white">DS</span>
             <div><p className="font-semibold">Deep Saha</p><p className="text-sm text-muted">Founder</p></div>
           </div>
           <a className="mt-4 inline-flex items-center gap-2 text-sm text-fg underline decoration-line decoration-2 underline-offset-[6px] hover:decoration-accent" href="mailto:deep@deeptechcloud.online">

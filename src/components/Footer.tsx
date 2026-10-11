@@ -5,7 +5,7 @@ export function Footer() {
   const B = SITE.basePath;
   const link = "text-muted transition hover:text-fg";
   return (
-    <footer id="site-footer" className="border-t border-line">
+    <footer id="site-footer" className="border-t border-line bg-soft">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Wordmark />

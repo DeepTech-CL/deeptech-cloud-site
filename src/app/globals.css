@@ -9,6 +9,13 @@
   --color-accent: #2340ff;
   --color-btn: #10131a;
   --color-btn-2: #2340ff;
+  --color-teal: #0e9f9a;
+  --color-violet: #7048e8;
+  --color-amber: #e8890c;
+  --color-blue-tint: #e9eeff;
+  --color-teal-tint: #def5f3;
+  --color-violet-tint: #efe9ff;
+  --color-amber-tint: #fff0d6;
   --color-night: #0e1117;
   --color-night-2: #161b24;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -29,4 +36,13 @@ h1, h2, h3 { letter-spacing: -0.022em; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(35 64 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(35 64 255 / 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 95%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 95%);
 }
