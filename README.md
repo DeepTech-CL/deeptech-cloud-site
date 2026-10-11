@@ -23,7 +23,7 @@ Other scripts: `npm run lint`, `npm run typecheck`, `npm run build` (writes stat
 Vercel also works: import the repo, no config needed (leave `NEXT_PUBLIC_BASE_PATH` empty).
 
 ## Contact
-There is no form and no backend: the Contact section links to `mailto:deep@deeptechcloud.online`.
+There is no form and no backend: the Contact section links to `mailto:admin@deeptechcloud.online`.
 
 ## Custom domain
 See [docs/CLOUDFLARE-DNS.md](docs/CLOUDFLARE-DNS.md). Startup application notes: [docs/STARTUP-APPLICATION.md](docs/STARTUP-APPLICATION.md).

@@ -225,8 +225,8 @@ export function Company() {
             <span aria-hidden="true" className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-accent to-violet font-semibold text-white">DS</span>
             <div><p className="font-semibold">Deep Saha</p><p className="text-sm text-muted">Founder</p></div>
           </div>
-          <a className="mt-4 inline-flex items-center gap-2 text-sm text-fg underline decoration-line decoration-2 underline-offset-[6px] hover:decoration-accent" href="mailto:deep@deeptechcloud.online">
-            <Mail size={15} aria-hidden="true" /> deep@deeptechcloud.online
+          <a className="mt-4 inline-flex items-center gap-2 text-sm text-fg underline decoration-line decoration-2 underline-offset-[6px] hover:decoration-accent" href="mailto:admin@deeptechcloud.online">
+            <Mail size={15} aria-hidden="true" /> admin@deeptechcloud.online
           </a>
         </div>
       </div>

@@ -17,7 +17,7 @@ Set every record below to **DNS only (grey cloud)** until GitHub has issued the 
 | AAAA | `@` | `2606:50c0:8003::153` | DNS only |
 | CNAME | `www` | `deeptech-cl.github.io` | DNS only |
 
-Delete any older A/AAAA/CNAME records for `@` or `www` that point elsewhere. **Do not touch your MX / TXT (SPF, DKIM) records** — they carry your `deep@deeptechcloud.online` email.
+Delete any older A/AAAA/CNAME records for `@` or `www` that point elsewhere. **Do not touch your MX / TXT (SPF, DKIM) records** — they carry your `admin@deeptechcloud.online` email.
 
 ## 2. GitHub
 Settings → Pages → Custom domain = `deeptechcloud.online` (`public/CNAME` also carries it) →

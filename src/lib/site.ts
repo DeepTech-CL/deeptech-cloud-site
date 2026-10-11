@@ -1,7 +1,7 @@
 export const SITE = {
   name: "DeepTech Cloud",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://deeptechcloud.online",
-  email: "deep@deeptechcloud.online",
+  email: "admin@deeptechcloud.online",
   description:
     "DeepTech Cloud is building an AI troubleshooting assistant that helps engineering and IT support teams find the cause of technical problems faster and write clear incident reports.",
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
